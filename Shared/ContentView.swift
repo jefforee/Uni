@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 
 struct ContentView: View {
@@ -51,6 +52,7 @@ struct ContentView: View {
     
     func shortenURL(string: String) {
         shortenedLink = String(string.prefix(22)) // TODO: Process string
+        
     }
     
     func shareButton() {
