@@ -13,10 +13,10 @@
 		34F671CC272369B3003319F8 /* Tests_macOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F671CB272369B3003319F8 /* Tests_macOSLaunchTests.swift */; };
 		34F671CD272369B3003319F8 /* UniApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F671A5272369B2003319F8 /* UniApp.swift */; };
 		34F671CE272369B3003319F8 /* UniApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F671A5272369B2003319F8 /* UniApp.swift */; };
-		34F671CF272369B3003319F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F671A6272369B2003319F8 /* ContentView.swift */; };
-		34F671D0272369B3003319F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F671A6272369B2003319F8 /* ContentView.swift */; };
 		34F671D1272369B3003319F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34F671A7272369B3003319F8 /* Assets.xcassets */; };
 		34F671D2272369B3003319F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34F671A7272369B3003319F8 /* Assets.xcassets */; };
+		34F671E22723D7BA003319F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F671E12723D7BA003319F8 /* ContentView.swift */; };
+		34F671E32723D7BA003319F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F671E12723D7BA003319F8 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +38,6 @@
 
 /* Begin PBXFileReference section */
 		34F671A5272369B2003319F8 /* UniApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniApp.swift; sourceTree = "<group>"; };
-		34F671A6272369B2003319F8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		34F671A7272369B3003319F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		34F671AC272369B3003319F8 /* Uni.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Uni.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34F671B2272369B3003319F8 /* Uni.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Uni.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,6 +48,7 @@
 		34F671C5272369B3003319F8 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34F671C9272369B3003319F8 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		34F671CB272369B3003319F8 /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
+		34F671E12723D7BA003319F8 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = ../../../../../.Trash/ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				34F671A5272369B2003319F8 /* UniApp.swift */,
-				34F671A6272369B2003319F8 /* ContentView.swift */,
+				34F671E12723D7BA003319F8 /* ContentView.swift */,
 				34F671A7272369B3003319F8 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -299,7 +299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34F671CF272369B3003319F8 /* ContentView.swift in Sources */,
+				34F671E22723D7BA003319F8 /* ContentView.swift in Sources */,
 				34F671CD272369B3003319F8 /* UniApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,7 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34F671D0272369B3003319F8 /* ContentView.swift in Sources */,
+				34F671E32723D7BA003319F8 /* ContentView.swift in Sources */,
 				34F671CE272369B3003319F8 /* UniApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
