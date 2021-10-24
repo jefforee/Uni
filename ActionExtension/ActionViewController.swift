@@ -21,10 +21,6 @@ class ActionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NavigationBar.topItem?.title = "Uni"
-        // Get the item[s] we're handling from the extension context.
-        
-        // For example, look for an image and place it into an image view.
-        // Replace this with something appropriate for the type[s] your extension supports.
     }
     
     override func viewDidLoad() {
@@ -57,7 +53,6 @@ class ActionViewController: UIViewController {
 
     @IBAction func done() {
         // Return any edited content to the host app.
-        // This template doesn't do anything, so we just echo the passed in items.
         self.extensionContext!.completeRequest(returningItems: self.extensionContext!.inputItems, completionHandler: nil)
     }
     
