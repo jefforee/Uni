@@ -17,6 +17,10 @@ parts of links hidden underneath all of the tracking parameters.
 - UIKit
 - Regex
 
-Built during Calhacks 8.0
+Built during Calhacks 8.0 by 
+[@origamiman72](https://github.com/origamiman72), 
+[@andrewkdinh](https://github.com/andrewkdinh), 
+[@weipangwp](https://github.com/weipangwp), 
+[@jefforee](https://github.com/jefforee)
 
 Licensed under AGPL-3.0
