@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		346EF869272545F6003C6595 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349325A92725151B001312C9 /* ActionViewController.swift */; };
+		346EF86E27254AAC003C6595 /* URLShortener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346EF86D27254AAC003C6595 /* URLShortener.swift */; };
+		346EF86F27254AAC003C6595 /* URLShortener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346EF86D27254AAC003C6595 /* URLShortener.swift */; };
+		346EF87027254DB3003C6595 /* URLShortener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346EF86D27254AAC003C6595 /* URLShortener.swift */; };
+		349325A52725151B001312C9 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 349325A42725151B001312C9 /* UniformTypeIdentifiers.framework */; platformFilter = maccatalyst; };
+		349325A82725151B001312C9 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 349325A72725151B001312C9 /* Media.xcassets */; };
+		349325AA2725151B001312C9 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349325A92725151B001312C9 /* ActionViewController.swift */; };
+		349325AD2725151B001312C9 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 349325AB2725151B001312C9 /* MainInterface.storyboard */; };
+		349325B12725151B001312C9 /* ActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 349325A22725151B001312C9 /* ActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		349325B7272533B5001312C9 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = 349325B6272533B5001312C9 /* AppIcon.appiconset */; };
+		349325B8272533B5001312C9 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = 349325B6272533B5001312C9 /* AppIcon.appiconset */; };
 		34F671BE272369B3003319F8 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F671BD272369B3003319F8 /* Tests_iOS.swift */; };
 		34F671C0272369B3003319F8 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F671BF272369B3003319F8 /* Tests_iOSLaunchTests.swift */; };
 		34F671CA272369B3003319F8 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F671C9272369B3003319F8 /* Tests_macOS.swift */; };
@@ -21,6 +32,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		349325AF2725151B001312C9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34F671A0272369B1003319F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 349325A12725151B001312C9;
+			remoteInfo = ActionExtension;
+		};
 		34F671BA272369B3003319F8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 34F671A0272369B1003319F8 /* Project object */;
@@ -37,7 +55,29 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		349325B22725151B001312C9 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				349325B12725151B001312C9 /* ActionExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		346EF86D27254AAC003C6595 /* URLShortener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLShortener.swift; sourceTree = "<group>"; };
+		349325A22725151B001312C9 /* ActionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ActionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		349325A42725151B001312C9 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
+		349325A72725151B001312C9 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		349325A92725151B001312C9 /* ActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
+		349325AC2725151B001312C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		349325AE2725151B001312C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		349325B6272533B5001312C9 /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AppIcon.appiconset; path = ../../../../../Downloads/UniICon/ios/AppIcon.appiconset; sourceTree = "<group>"; };
 		34F671A5272369B2003319F8 /* UniApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniApp.swift; sourceTree = "<group>"; };
 		34F671A7272369B3003319F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		34F671AC272369B3003319F8 /* Uni.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Uni.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,6 +94,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3493259F2725151B001312C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				349325A52725151B001312C9 /* UniformTypeIdentifiers.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		34F671A9272369B3003319F8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -85,6 +133,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		349325A32725151B001312C9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				349325A42725151B001312C9 /* UniformTypeIdentifiers.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		349325A62725151B001312C9 /* ActionExtension */ = {
+			isa = PBXGroup;
+			children = (
+				349325A72725151B001312C9 /* Media.xcassets */,
+				349325A92725151B001312C9 /* ActionViewController.swift */,
+				349325AB2725151B001312C9 /* MainInterface.storyboard */,
+				349325AE2725151B001312C9 /* Info.plist */,
+			);
+			path = ActionExtension;
+			sourceTree = "<group>";
+		};
 		34F6719F272369B1003319F8 = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +160,8 @@
 				34F671B3272369B3003319F8 /* macOS */,
 				34F671BC272369B3003319F8 /* Tests iOS */,
 				34F671C8272369B3003319F8 /* Tests macOS */,
+				349325A62725151B001312C9 /* ActionExtension */,
+				349325A32725151B001312C9 /* Frameworks */,
 				34F671AD272369B3003319F8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -103,6 +172,8 @@
 				34F671A5272369B2003319F8 /* UniApp.swift */,
 				34F671E427240C74003319F8 /* ContentView.swift */,
 				34F671A7272369B3003319F8 /* Assets.xcassets */,
+				346EF86D27254AAC003C6595 /* URLShortener.swift */,
+				349325B6272533B5001312C9 /* AppIcon.appiconset */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -114,6 +185,7 @@
 				34F671B2272369B3003319F8 /* Uni.app */,
 				34F671B9272369B3003319F8 /* Tests iOS.xctest */,
 				34F671C5272369B3003319F8 /* Tests macOS.xctest */,
+				349325A22725151B001312C9 /* ActionExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -147,6 +219,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		349325A12725151B001312C9 /* ActionExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 349325B52725151B001312C9 /* Build configuration list for PBXNativeTarget "ActionExtension" */;
+			buildPhases = (
+				3493259E2725151B001312C9 /* Sources */,
+				3493259F2725151B001312C9 /* Frameworks */,
+				349325A02725151B001312C9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ActionExtension;
+			productName = ActionExtension;
+			productReference = 349325A22725151B001312C9 /* ActionExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		34F671AB272369B3003319F8 /* Uni (iOS) */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 34F671D5272369B3003319F8 /* Build configuration list for PBXNativeTarget "Uni (iOS)" */;
@@ -154,10 +243,12 @@
 				34F671A8272369B3003319F8 /* Sources */,
 				34F671A9272369B3003319F8 /* Frameworks */,
 				34F671AA272369B3003319F8 /* Resources */,
+				349325B22725151B001312C9 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				349325B02725151B001312C9 /* PBXTargetDependency */,
 			);
 			name = "Uni (iOS)";
 			productName = "Uni (iOS)";
@@ -227,6 +318,9 @@
 				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1300;
 				TargetAttributes = {
+					349325A12725151B001312C9 = {
+						CreatedOnToolsVersion = 13.0;
+					};
 					34F671AB272369B3003319F8 = {
 						CreatedOnToolsVersion = 13.0;
 					};
@@ -260,16 +354,27 @@
 				34F671B1272369B3003319F8 /* Uni (macOS) */,
 				34F671B8272369B3003319F8 /* Tests iOS */,
 				34F671C4272369B3003319F8 /* Tests macOS */,
+				349325A12725151B001312C9 /* ActionExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		349325A02725151B001312C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				349325A82725151B001312C9 /* Media.xcassets in Resources */,
+				349325AD2725151B001312C9 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		34F671AA272369B3003319F8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				34F671D1272369B3003319F8 /* Assets.xcassets in Resources */,
+				349325B7272533B5001312C9 /* AppIcon.appiconset in Resources */,
 				4907130C2724CB9800419BEA /* rules.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,6 +383,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				349325B8272533B5001312C9 /* AppIcon.appiconset in Resources */,
 				34F671D2272369B3003319F8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,12 +405,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3493259E2725151B001312C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				349325AA2725151B001312C9 /* ActionViewController.swift in Sources */,
+				346EF87027254DB3003C6595 /* URLShortener.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		34F671A8272369B3003319F8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				34F671CD272369B3003319F8 /* UniApp.swift in Sources */,
 				34F671E527240C74003319F8 /* ContentView.swift in Sources */,
+				346EF86E27254AAC003C6595 /* URLShortener.swift in Sources */,
+				346EF869272545F6003C6595 /* ActionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +431,7 @@
 			files = (
 				34F671CE272369B3003319F8 /* UniApp.swift in Sources */,
 				34F671E627240C74003319F8 /* ContentView.swift in Sources */,
+				346EF86F27254AAC003C6595 /* URLShortener.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +456,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		349325B02725151B001312C9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 349325A12725151B001312C9 /* ActionExtension */;
+			targetProxy = 349325AF2725151B001312C9 /* PBXContainerItemProxy */;
+		};
 		34F671BB272369B3003319F8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 34F671AB272369B3003319F8 /* Uni (iOS) */;
@@ -350,7 +473,73 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		349325AB2725151B001312C9 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				349325AC2725151B001312C9 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		349325B32725151B001312C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PR34SBNV38;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ActionExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Remove Trackers with Uni";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = abhikahuja.Uni.ActionExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		349325B42725151B001312C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PR34SBNV38;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ActionExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Remove Trackers with Uni";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = abhikahuja.Uni.ActionExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		34F671D3272369B3003319F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -465,10 +654,12 @@
 		34F671D6272369B3003319F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PR34SBNV38;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -494,6 +685,7 @@
 		34F671D7272369B3003319F8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -673,6 +865,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		349325B52725151B001312C9 /* Build configuration list for PBXNativeTarget "ActionExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				349325B32725151B001312C9 /* Debug */,
+				349325B42725151B001312C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		34F671A3272369B1003319F8 /* Build configuration list for PBXProject "Uni" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
