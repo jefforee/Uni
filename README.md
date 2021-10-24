@@ -8,7 +8,7 @@ Uni provides a share sheet so that users can seamlessly share links
 both into and out of Uni, having the links cleaned up in the process.
 
 Uni derives its name from Urchin Tracking Modules, or utms, a kind
-of tracking parameter often including in links. Uni is a delicacy
+of tracking parameter often included in links. Uni is a delicacy
 that exists inside urchins, and similarly, Uni gives you the best
 parts of links hidden underneath all of the tracking parameters.
 
