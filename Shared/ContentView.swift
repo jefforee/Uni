@@ -8,6 +8,44 @@
 import SwiftUI
 import Foundation
 
+let G_TRACKING: [String] = [
+            "sourceid",
+            "aqs",
+            "client",
+            "source",
+            "ust",
+            "usg"
+]
+
+let UTM_PARAMS: [String] = [
+            "utm_\\w+",
+            "ga_source",
+            "ga_medium",
+            "ga_term",
+            "ga_content",
+            "ga_campaign",
+            "ga_place",
+            "yclid",
+            "_openstat",
+            "fb_action_ids",
+            "fb_action_types",
+            "fb_source",
+            "fb_ref",
+            "fbclid",
+            "action_object_map",
+            "action_type_map",
+            "action_ref_map",
+            "gs_l",
+            "mkt_tok",
+            "hmb_campaign",
+            "hmb_medium",
+            "hmb_source",
+            "[\\?|&]ref[\\_]?",
+            "amp[_#\\w]+",
+            "click"
+            ]
+
+let urlRegex = "(?i)\\b((?:[a-z][\\w-]+:(?:/{1,3}|[a-z0-9%])|www\\d{0,3}[.]|[a-z0-9.\\-]+[.][a-z]{2,10}/)(?:[^\\s()<>]+|\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)|[^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]))"
 
 struct ContentView: View {
     @State private var link: String = ""
@@ -64,14 +102,51 @@ struct ContentView: View {
     }
     
     func shortenURL(string: String) {
-        shortenedLink = string
+        var newString = string
+        if (string != "" && !string.hasPrefix("http")) {
+            newString = "https://" + string
+        }
         
-        guard let jsonRules = getJsonRules() as? [String: Any] else {
+        shortenedLink = removeTrackingParams(url: newString)
+        shortenedLink = replaceDomains(string: shortenedLink)
+        // followRedirects(link: shortenedLink)
+    }
+    
+    func followRedirects(link: String) {
+        guard let url = URL(string: link) else {
             return
         }
         
-        guard let providers = jsonRules["providers"] as? [String: [String: Any]] else {
+        // Only visit HTTPS links
+        if url.scheme != "https" {
             return
+        }
+
+        let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
+            guard error == nil else {
+                return
+            }
+            guard let response = response else {
+                return
+            }
+            guard let responseUrl = response.url else {
+                return
+            }
+            if (responseUrl.absoluteString != link) {
+                shortenURL(string: responseUrl.absoluteString) // TODO: This leads to a data race, need a counter and only update if counter > previous counter
+            }
+        }
+        task.resume()
+    }
+    
+    func removeTrackingParams(url: String) -> String {
+        var cleanedUrl = url
+        guard let jsonRules = getJsonRules() as? [String: Any] else {
+            return cleanedUrl
+        }
+        
+        guard let providers = jsonRules["providers"] as? [String: [String: Any]] else {
+            return cleanedUrl
         }
 
         for (_, providerVal) in providers {
@@ -80,7 +155,7 @@ struct ContentView: View {
             }
             
             // Check that URL matches pattern
-            guard shortenedLink.range(of: urlPattern, options: [.regularExpression, .caseInsensitive]) != nil else {
+            guard cleanedUrl.range(of: urlPattern, options: [.regularExpression, .caseInsensitive]) != nil else {
                 continue
             }
             
@@ -90,7 +165,7 @@ struct ContentView: View {
             
             // Check if we match an exception
             for exception: String in exceptions {
-                if shortenedLink.range(of: exception, options: [.regularExpression, .caseInsensitive]) != nil {
+                if cleanedUrl.range(of: exception, options: [.regularExpression, .caseInsensitive]) != nil {
                     continue
                 }
             }
@@ -115,82 +190,75 @@ struct ContentView: View {
              */
             
             for rule: String in rules {
-                shortenedLink = shortenedLink.replacingOccurrences(of: rule, with: "", options: [.regularExpression, .caseInsensitive])
+                cleanedUrl = cleanedUrl.replacingOccurrences(of: rule, with: "", options: [.regularExpression, .caseInsensitive])
             }
         }
         
-        // TODO: Define these 2 as static variables
-        let UTM_PARAMS: [String] = [
-                    "utm_\\w+",
-                    "ga_source",
-                    "ga_medium",
-                    "ga_term",
-                    "ga_content",
-                    "ga_campaign",
-                    "ga_place",
-                    "yclid",
-                    "_openstat",
-                    "fb_action_ids",
-                    "fb_action_types",
-                    "fb_source",
-                    "fb_ref",
-                    "fbclid",
-                    "action_object_map",
-                    "action_type_map",
-                    "action_ref_map",
-                    "gs_l",
-                    "mkt_tok",
-                    "hmb_campaign",
-                    "hmb_medium",
-                    "hmb_source",
-                    "[\\?|&]ref[\\_]?",
-                    "amp[_#\\w]+",
-                    "click"
-                    ]
-        let urlRegex = "(?i)\\b((?:[a-z][\\w-]+:(?:/{1,3}|[a-z0-9%])|www\\d{0,3}[.]|[a-z0-9.\\-]+[.][a-z]{2,10}/)(?:[^\\s()<>]+|\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)|[^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]))"
-        
         for utm in UTM_PARAMS {
             var regex = try! NSRegularExpression(pattern: "&amp;" + utm + "=[0-9a-zA-Z._-]*")
-            shortenedLink = regex.stringByReplacingMatches(in: shortenedLink, options: [], range: NSRange(location: 0, length:  shortenedLink.count), withTemplate: "")
+            cleanedUrl = regex.stringByReplacingMatches(in: cleanedUrl, options: [], range: NSRange(location: 0, length:  cleanedUrl.count), withTemplate: "")
             
             regex = try! NSRegularExpression(pattern: "&" + utm + "=[0-9a-zA-Z._-]*")
-            shortenedLink = regex.stringByReplacingMatches(in: shortenedLink, options: [], range: NSRange(location: 0, length:  shortenedLink.count), withTemplate: "")
+            cleanedUrl = regex.stringByReplacingMatches(in: cleanedUrl, options: [], range: NSRange(location: 0, length:  cleanedUrl.count), withTemplate: "")
             
             regex = try! NSRegularExpression(pattern: "\\?" + utm + "=[0-9a-zA-Z._-]*")
-            shortenedLink = regex.stringByReplacingMatches(in: shortenedLink, options: [], range: NSRange(location: 0, length:  shortenedLink.count), withTemplate: "?")
+            cleanedUrl = regex.stringByReplacingMatches(in: cleanedUrl, options: [], range: NSRange(location: 0, length:  cleanedUrl.count), withTemplate: "?")
             
             regex = try! NSRegularExpression(pattern: "/" + utm + "=" + urlRegex)
-            shortenedLink = regex.stringByReplacingMatches(in: shortenedLink, options: [], range: NSRange(location: 0, length:  shortenedLink.count), withTemplate: "/")
+            cleanedUrl = regex.stringByReplacingMatches(in: cleanedUrl, options: [], range: NSRange(location: 0, length:  cleanedUrl.count), withTemplate: "/")
             
             regex = try! NSRegularExpression(pattern: "#" + utm + "=" + urlRegex)
-            shortenedLink = regex.stringByReplacingMatches(in: shortenedLink, options: [], range: NSRange(location: 0, length:  shortenedLink.count), withTemplate: "")
+            cleanedUrl = regex.stringByReplacingMatches(in: cleanedUrl, options: [], range: NSRange(location: 0, length:  cleanedUrl.count), withTemplate: "")
         }
         
-        // TODO: Make this static
-        let G_TRACKING: [String] = [
-                    "sourceid",
-                    "aqs",
-                    "client",
-                    "source",
-                    "ust",
-                    "usg"
-        ]
-        
-        let url = URL(string: shortenedLink)
+        let url = URL(string: cleanedUrl)
         let domain = url?.host
         
         if domain != nil {
             for utm in G_TRACKING {
-                shortenedLink = shortenedLink.replacingOccurrences(of: "&amp;" + utm + "=[0-9a-zA-Z._-]*", with: "")
-                shortenedLink = shortenedLink.replacingOccurrences(of: "&" + utm + "=[0-9a-zA-Z._-]*", with: "")
-                shortenedLink = shortenedLink.replacingOccurrences(of: "\\?" + utm + "=[0-9a-zA-Z._-]*", with: "?")
-                shortenedLink = shortenedLink.replacingOccurrences(of: "/" + utm + "=" + urlRegex, with: "/")
+                cleanedUrl = cleanedUrl.replacingOccurrences(of: "&amp;" + utm + "=[0-9a-zA-Z._-]*", with: "")
+                cleanedUrl = cleanedUrl.replacingOccurrences(of: "&" + utm + "=[0-9a-zA-Z._-]*", with: "")
+                cleanedUrl = cleanedUrl.replacingOccurrences(of: "\\?" + utm + "=[0-9a-zA-Z._-]*", with: "?")
+                cleanedUrl = cleanedUrl.replacingOccurrences(of: "/" + utm + "=" + urlRegex, with: "/")
             }
         }
         
-        if (shortenedLink.last == "&" || shortenedLink.last == "?") {
-            shortenedLink = String(shortenedLink.dropLast())
+        if (cleanedUrl.last == "&" || cleanedUrl.last == "?") {
+            cleanedUrl = String(cleanedUrl.dropLast())
         }
+        
+        return cleanedUrl
+    }
+    
+    func getDomainMappings() -> Dictionary<String, String> {
+        var domains: Dictionary<String, String> = [:]
+        // TODO: Fix these hardcodings
+        domains["twitter.com"] = "nitter.net"
+        domains["reddit.com"] = "libredd.it"
+        domains["youtube.com"] = "yewtu.be"
+        domains["instagram.com"] = "bibliogram.ethibox.fr"
+        return domains
+    }
+    
+    func replaceDomains(string: String) -> String {
+        guard let url = URL(string: string) else {
+            return string
+        }
+        
+        guard let oldDomain = url.host else {
+            return string
+        }
+
+        for (from, to) in getDomainMappings() {
+            let newDomain = oldDomain.replacingOccurrences(of: from, with: to)
+            if newDomain != oldDomain {
+                guard let scheme = url.scheme else {
+                    break
+                }
+                return scheme + "://" + newDomain + url.path
+            }
+        }
+        return string
     }
     
     func shareButton() {
