@@ -50,9 +50,147 @@ struct ContentView: View {
         .padding()
     }
     
+    func getJsonRules() -> Any? {
+        do {
+            if let bundlePath = Bundle.main.path(forResource: "rules", ofType: "json") {
+                if let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
+                    return try? JSONSerialization.jsonObject(with: jsonData, options: [])
+                }
+            }
+        } catch {
+            print(error)
+        }
+        return nil
+    }
+    
     func shortenURL(string: String) {
-        shortenedLink = String(string.prefix(22)) // TODO: Process string
+        shortenedLink = string
         
+        guard let jsonRules = getJsonRules() as? [String: Any] else {
+            return
+        }
+        
+        guard let providers = jsonRules["providers"] as? [String: [String: Any]] else {
+            return
+        }
+
+        for (_, providerVal) in providers {
+            guard let urlPattern = providerVal["urlPattern"] as? String else {
+                continue
+            }
+            
+            // Check that URL matches pattern
+            guard shortenedLink.range(of: urlPattern, options: [.regularExpression, .caseInsensitive]) != nil else {
+                continue
+            }
+            
+            guard let exceptions = providerVal["exceptions"] as? [String] else {
+                continue
+            }
+            
+            // Check if we match an exception
+            for exception: String in exceptions {
+                if shortenedLink.range(of: exception, options: [.regularExpression, .caseInsensitive]) != nil {
+                    continue
+                }
+            }
+            
+            guard let completeProvider = providerVal["completeProvider"] as? Bool else {
+                continue
+            }
+            
+            guard !completeProvider else {
+                // TODO: Figure what to do here, UntrackMe doesn't do anything either
+                continue
+            }
+            
+            guard let rules = providerVal["rules"] as? [String] else {
+                continue
+            }
+            
+            /*
+            guard let redirections = providerVal["redirections"] as? [String] else {
+                continue
+            }
+             */
+            
+            for rule: String in rules {
+                shortenedLink = shortenedLink.replacingOccurrences(of: rule, with: "", options: [.regularExpression, .caseInsensitive])
+            }
+        }
+        
+        // TODO: Define these 2 as static variables
+        let UTM_PARAMS: [String] = [
+                    "utm_\\w+",
+                    "ga_source",
+                    "ga_medium",
+                    "ga_term",
+                    "ga_content",
+                    "ga_campaign",
+                    "ga_place",
+                    "yclid",
+                    "_openstat",
+                    "fb_action_ids",
+                    "fb_action_types",
+                    "fb_source",
+                    "fb_ref",
+                    "fbclid",
+                    "action_object_map",
+                    "action_type_map",
+                    "action_ref_map",
+                    "gs_l",
+                    "mkt_tok",
+                    "hmb_campaign",
+                    "hmb_medium",
+                    "hmb_source",
+                    "[\\?|&]ref[\\_]?",
+                    "amp[_#\\w]+",
+                    "click"
+                    ]
+        let urlRegex = "(?i)\\b((?:[a-z][\\w-]+:(?:/{1,3}|[a-z0-9%])|www\\d{0,3}[.]|[a-z0-9.\\-]+[.][a-z]{2,10}/)(?:[^\\s()<>]+|\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)|[^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’]))"
+        
+        for utm in UTM_PARAMS {
+            var regex = try! NSRegularExpression(pattern: "&amp;" + utm + "=[0-9a-zA-Z._-]*")
+            shortenedLink = regex.stringByReplacingMatches(in: shortenedLink, options: [], range: NSRange(location: 0, length:  shortenedLink.count), withTemplate: "")
+            
+            regex = try! NSRegularExpression(pattern: "&" + utm + "=[0-9a-zA-Z._-]*")
+            shortenedLink = regex.stringByReplacingMatches(in: shortenedLink, options: [], range: NSRange(location: 0, length:  shortenedLink.count), withTemplate: "")
+            
+            regex = try! NSRegularExpression(pattern: "\\?" + utm + "=[0-9a-zA-Z._-]*")
+            shortenedLink = regex.stringByReplacingMatches(in: shortenedLink, options: [], range: NSRange(location: 0, length:  shortenedLink.count), withTemplate: "?")
+            
+            regex = try! NSRegularExpression(pattern: "/" + utm + "=" + urlRegex)
+            shortenedLink = regex.stringByReplacingMatches(in: shortenedLink, options: [], range: NSRange(location: 0, length:  shortenedLink.count), withTemplate: "/")
+            
+            regex = try! NSRegularExpression(pattern: "#" + utm + "=" + urlRegex)
+            shortenedLink = regex.stringByReplacingMatches(in: shortenedLink, options: [], range: NSRange(location: 0, length:  shortenedLink.count), withTemplate: "")
+        }
+        
+        // TODO: Make this static
+        let G_TRACKING: [String] = [
+                    "sourceid",
+                    "aqs",
+                    "client",
+                    "source",
+                    "ust",
+                    "usg"
+        ]
+        
+        let url = URL(string: shortenedLink)
+        let domain = url?.host
+        
+        if domain != nil {
+            for utm in G_TRACKING {
+                shortenedLink = shortenedLink.replacingOccurrences(of: "&amp;" + utm + "=[0-9a-zA-Z._-]*", with: "")
+                shortenedLink = shortenedLink.replacingOccurrences(of: "&" + utm + "=[0-9a-zA-Z._-]*", with: "")
+                shortenedLink = shortenedLink.replacingOccurrences(of: "\\?" + utm + "=[0-9a-zA-Z._-]*", with: "?")
+                shortenedLink = shortenedLink.replacingOccurrences(of: "/" + utm + "=" + urlRegex, with: "/")
+            }
+        }
+        
+        if (shortenedLink.last == "&" || shortenedLink.last == "?") {
+            shortenedLink = String(shortenedLink.dropLast())
+        }
     }
     
     func shareButton() {

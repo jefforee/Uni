@@ -17,6 +17,7 @@
 		34F671D2272369B3003319F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34F671A7272369B3003319F8 /* Assets.xcassets */; };
 		34F671E527240C74003319F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F671E427240C74003319F8 /* ContentView.swift */; };
 		34F671E627240C74003319F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F671E427240C74003319F8 /* ContentView.swift */; };
+		4907130C2724CB9800419BEA /* rules.json in Resources */ = {isa = PBXBuildFile; fileRef = 4907130B2724CB9800419BEA /* rules.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		34F671C9272369B3003319F8 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		34F671CB272369B3003319F8 /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
 		34F671E427240C74003319F8 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4907130B2724CB9800419BEA /* rules.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = rules.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 		34F6719F272369B1003319F8 = {
 			isa = PBXGroup;
 			children = (
+				4907130B2724CB9800419BEA /* rules.json */,
 				34F671A4272369B1003319F8 /* Shared */,
 				34F671B3272369B3003319F8 /* macOS */,
 				34F671BC272369B3003319F8 /* Tests iOS */,
@@ -267,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34F671D1272369B3003319F8 /* Assets.xcassets in Resources */,
+				4907130C2724CB9800419BEA /* rules.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
